@@ -1,0 +1,95 @@
+@import '../../../styles.sass'
+.navbar
+  position: absolute
+  background-color: $primary-blue-color
+  height: 100vh
+
+  .top-gray-bar
+    background-color: $secondary-gray-color
+    height: 60px
+    width: 250px
+    div h5
+      color: $white-color
+      font-size: 20px
+      font-weight: 300
+      span
+        font-weight: bold
+
+  .user-description
+    height: 70px
+    padding: 6px
+    .avatar-image
+      background-color: $white-color
+      height: 60px
+      width: 60px
+      padding: 5px
+      border-radius: 50%
+      img
+        width: 100%
+        height: 100%
+    .name-user
+      font-size: 20px
+      font-weight: bold
+      width: calc( 100% - 60px )
+      color: $white-color
+.gray-bar
+  background-color: $secondary-gray-color
+  height: 30px
+  p
+    font-size: 13px
+    font-weight: 500
+    padding-top: 5px
+    padding-left: 5px
+    margin-left: 10px
+.options-navbar
+  a
+    display: flex
+    height: 60px
+    align-items: center
+    justify-content: start
+    &:hover
+      border-left: 3px solid transparent
+      border-left-color: rgb(66, 159, 237)
+      background-color: rgba(0, 0, 0, 0.267)
+      transition: background-color 0.3s
+    i
+      color: $white-color
+      font-weight: 900
+      margin-left: 10px
+    p
+      color: $white-color
+      cursor: pointer
+      font-size: 18px
+      font-weight: 300
+      margin-left: 10px
+  .products-submenu-option
+    display: flex
+    height: 60px
+    align-items: center
+    justify-content: start
+    cursor: pointer
+    i:last-child
+      margin-left: 100px
+    .rotate-0-deg
+      transform: rotate(0deg)
+    .rotate-90-deg
+      transform: rotate(90deg)
+    &:hover
+      border-left: 3px solid transparent
+      border-left-color: rgb(66, 159, 237)
+      background-color: rgba(0, 0, 0, 0.267)
+      transition: background-color 0.3s
+    i
+      color: $white-color
+      font-weight: 900
+      margin-left: 10px
+    p
+      color: $white-color
+      font-size: 20px
+      font-weight: 300
+      margin-left: 10px
+  .submenu
+    height: 175px
+  .submenu a p
+    font-size: 16px
+    margin-left: 30px

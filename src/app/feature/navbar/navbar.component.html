@@ -1,0 +1,66 @@
+<div class="navbar">
+  <div class="top-gray-bar">
+    <div class="flex justify-center items-center h-full">
+      <h5><span>Inventory</span> control</h5>
+    </div>
+  </div>
+
+  <div class="user-description flex">
+    <div class="avatar-image">
+      <img src="assets/images/avatar-user.png" alt="user avatar">
+    </div>
+    <div class="name-user flex justify-center items-center h-full">
+      <p>Administrator</p>
+    </div>
+  </div>
+
+  <div class="gray-bar">
+    <p>Menu</p>
+  </div>
+
+  <div class="options-navbar">
+    <a href="#">
+      <span><i class="fa-solid fa-house"></i></span>
+      <p>Home</p>
+    </a>
+
+    <a href="#">
+      <span><i class="fa-solid fa-cart-shopping"></i></span>
+      <p>Shopping</p>
+    </a>
+
+    <a href="#">
+      <span><i class="fa-solid fa-cash-register"></i></span>
+      <p>Sales</p>
+    </a>
+
+    <div>
+      <div (click)="deploySubmenu()" class="products-submenu-option">
+        <i class="fa-solid fa-basket-shopping"></i>
+        <p>Products</p>
+        <i [ngClass]="flagDeploySubmenu ? 'rotate-90-deg' : 'rotate-0-deg'" class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div *ngIf="flagDeploySubmenu" class="submenu">
+        <a routerLink="/products" routerLinkActive="active">
+          <p>Manage Products</p>
+        </a>
+        <a href="#">
+          <p>Manage Categories</p>
+        </a>
+        <a href="#">
+          <p>Manage Unit Measurement</p>
+        </a>
+      </div>
+    </div>
+
+    <a href="#">
+      <span><i class="fa-solid fa-circle-user"></i></span>
+      <p>Clients</p>
+    </a>
+
+    <a href="#">
+      <span><i class="fa-solid fa-user"></i></span>
+      <p>Providers</p>
+    </a>
+  </div>
+</div>
