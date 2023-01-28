@@ -1,3 +1,47 @@
-<div class="border border-t-4 rounded-md m-6">
+<div class="box-forms shadow-lg">
   <p>Create Product</p>
+
+  <form class="flex flex-col" action="">
+    <div class="form-group">
+      <label>Name</label>
+      <input class="" type="text" placeholder="Name of product">
+
+
+      <label>Reference</label>
+      <input type="text" placeholder="Name of product">
+
+
+
+      <label>Amount</label>
+      <input type="number" placeholder="Name of product">
+
+
+      <label>Price</label>
+      <input type="number" placeholder="Name of product">
+
+      <label>Category</label>
+      <select name="status" placeholder="select">
+        <option value="">select a option</option>
+        <option *ngFor="let category of categories">{{category}}</option>
+      </select>
+
+      <label>Unit Measurement</label>
+      <select name="status" placeholder="select">
+        <option value="">select a option</option>
+        <option *ngFor="let category of categories">{{category}}</option>
+      </select>
+
+      <label>Provider</label>
+      <select name="status" placeholder="select">
+        <option value="">select a option</option>
+        <option *ngFor="let category of categories">{{category}}</option>
+      </select>
+
+      <button class="button-create">
+        Create Product
+      </button>
+
+    </div>
+
+  </form>
 </div>

@@ -9,9 +9,14 @@ import { FormControl } from '@angular/forms';
 })
 export class CreateProductComponent implements OnInit {
 
-  constructor() { }
+  categories: string[] = [];
+
+  constructor() {
+    this.categories = ['beverages', 'fast-food'];
+  }
 
   ngOnInit(): void {
+
   }
 
 }
