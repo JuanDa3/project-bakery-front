@@ -1,4 +1,13 @@
 <div class="title">
   <h1 class="border-solid md:border-dotted">Products Page</h1>
 </div>
-<app-create-product></app-create-product>
+<div class="flex">
+  <div class="flex-auto w-80">
+    <app-create-product></app-create-product>
+  </div>
+  <div class="flex-auto w-24">
+    <app-create-category></app-create-category>
+    <app-create-unit-measurement></app-create-unit-measurement>
+  </div>
+</div>
+<app-list-products></app-list-products>

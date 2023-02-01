@@ -1,30 +1,30 @@
 export class Product {
-  id?: number;
+  idProduct?: number;
   name: string;
   reference: string;
   price: number;
   amount: number;
-  category: string;
-  unitMeasurement: string;
-  provider: string;
+  nameCategory?: string;
+  nameUnitMeasurement?: string;
+  nameProvider?: string;
 
   constructor(
-    id: number,
+    idProduct: number,
     name: string,
     reference: string,
     price: number,
     amount: number,
-    category: string,
-    unitMeasurement: string,
-    provider: string
+    nameCategory: string,
+    nameUnitMeasurement: string,
+    nameProvider: string
   ) {
-    this.id = id;
+    this.idProduct = idProduct;
     this.name = name;
     this.reference = reference;
     this.price = price;
     this.amount = amount;
-    this.category = category;
-    this.unitMeasurement = unitMeasurement;
-    this.provider = provider;
+    this.nameCategory = nameCategory;
+    this.nameUnitMeasurement = nameUnitMeasurement;
+    this.nameProvider = nameProvider;
   }
 }

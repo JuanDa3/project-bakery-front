@@ -1,1 +1,39 @@
-<p>list-products works!</p>
+<div class="box-forms shadow-lg">
+  <p>List of Products</p>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">Name</th>
+          <th scope="col" class="px-6 py-3">Amount</th>
+          <th scope="col" class="px-6 py-3">Price</th>
+          <th scope="col" class="px-6 py-3">Reference</th>
+          <th scope="col" class="px-6 py-3">Category</th>
+          <th scope="col" class="px-6 py-3">Provider</th>
+          <th scope="col" class="px-6 py-3">Unit Measurement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center"
+          *ngFor="let product of listProducts">
+          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{product.name}}
+          </td>
+          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{product.amount}}
+          </td>
+          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{product.price}}
+          </td>
+          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{product.reference}}</td>
+          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{product.nameCategory}}</td>
+          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{product.nameProvider}}</td>
+          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{product.nameUnitMeasurement}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
