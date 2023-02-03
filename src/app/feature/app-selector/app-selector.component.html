@@ -1,0 +1,17 @@
+<label>Category</label>
+<select [(ngModel)]="category" name="status" placeholder="select" (change)="sendCategorySelected(category)">
+  <option value="">select a option</option>
+  <option [ngValue]="category" *ngFor="let category of listCategories">{{category.name}}</option>
+</select>
+
+<label>Unit Measurement</label>
+<select [(ngModel)]="unitMeasurement" name="status" placeholder="select" (change)="sendUMSelected(unitMeasurement)">
+  <option value="">select a option</option>
+  <option [ngValue]="um" *ngFor="let um of listUnitMeasurements">{{um.name}}</option>
+</select>
+
+<label>Provider</label>
+<select [(ngModel)]="provider" name="status" placeholder="select" (change)="sendProviderSelected(provider)">
+  <option value="">select a option</option>
+  <option [ngValue]="provider" *ngFor="let provider of listProviders">{{provider.name}}</option>
+</select>

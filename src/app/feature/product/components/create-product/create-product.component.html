@@ -1,43 +1,34 @@
 <div class="box-forms shadow-lg">
   <p>Create Product</p>
 
-  <form class="flex flex-col" action="">
+  <form [formGroup]="productForm" (ngSubmit)="create()" class="flex flex-col" action="">
     <div class="form-group">
       <label>Name</label>
-      <input class="" type="text" placeholder="Name of product">
+      <input id="productName" formControlName="name" required class="" type="text" placeholder="Name of product">
+
+      <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="invalid-feedback">
+        <div *ngIf="name?.errors?.['required']">
+          Name is required.
+        </div>
+      </div>
 
 
       <label>Reference</label>
-      <input type="text" placeholder="Name of product">
+      <input formControlName="reference" type="text" placeholder="Name of product">
 
 
 
       <label>Amount</label>
-      <input type="number" placeholder="Name of product">
+      <input formControlName="amount" type="number" placeholder="Name of product">
 
 
       <label>Price</label>
-      <input type="number" placeholder="Name of product">
+      <input formControlName="price" type="number" placeholder="Name of product">
 
-      <label>Category</label>
-      <select name="status" placeholder="select">
-        <option value="">select a option</option>
-        <option *ngFor="let category of categories">{{category}}</option>
-      </select>
+      <app-selector (categorySelected)="getCategory($event)" (providerSelected)="getProvider($event)"
+        (unitMeasurementSelected)="getUM($event)"></app-selector>
 
-      <label>Unit Measurement</label>
-      <select name="status" placeholder="select">
-        <option value="">select a option</option>
-        <option *ngFor="let category of categories">{{category}}</option>
-      </select>
-
-      <label>Provider</label>
-      <select name="status" placeholder="select">
-        <option value="">select a option</option>
-        <option *ngFor="let category of categories">{{category}}</option>
-      </select>
-
-      <button class="button-create">
+      <button role="button" type="submit" class="button-create">
         Create Product
       </button>
 
