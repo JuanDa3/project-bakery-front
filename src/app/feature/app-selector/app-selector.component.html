@@ -1,17 +1,39 @@
-<label>Category</label>
-<select [(ngModel)]="category" name="status" placeholder="select" (change)="sendCategorySelected(category)">
-  <option value="">select a option</option>
-  <option [ngValue]="category" *ngFor="let category of listCategories">{{category.name}}</option>
-</select>
+<form [formGroup]="optionsSelectorForm">
+  <label>Category</label>
+  <select formControlName="Category" name="status" required (change)="sendCategorySelected(category)">
+    <option value="">select a option</option>
+    <option [ngValue]="category" *ngFor="let category of listCategories">{{category.name}}</option>
+  </select>
 
-<label>Unit Measurement</label>
-<select [(ngModel)]="unitMeasurement" name="status" placeholder="select" (change)="sendUMSelected(unitMeasurement)">
-  <option value="">select a option</option>
-  <option [ngValue]="um" *ngFor="let um of listUnitMeasurements">{{um.name}}</option>
-</select>
+  <div *ngIf="dataForm['Category'].touched" class="form-danger-alert">
+    <div *ngIf="dataForm['Category'].errors && dataForm['Category'].errors['required']">
+      <p class="error-message">Select a category.</p>
+    </div>
+  </div>
 
-<label>Provider</label>
-<select [(ngModel)]="provider" name="status" placeholder="select" (change)="sendProviderSelected(provider)">
-  <option value="">select a option</option>
-  <option [ngValue]="provider" *ngFor="let provider of listProviders">{{provider.name}}</option>
-</select>
+  <label>Unit Measurement</label>
+  <select formControlName="UnitMeasurement" required name="status" placeholder="select"
+    (change)="sendUMSelected(unitMeasurement)">
+    <option value="">select a option</option>
+    <option [ngValue]="um" *ngFor="let um of listUnitMeasurements">{{um.name}}</option>
+  </select>
+
+  <div *ngIf="dataForm['UnitMeasurement'].touched" class="form-danger-alert">
+    <div *ngIf="dataForm['UnitMeasurement'].errors && dataForm['UnitMeasurement'].errors['required']">
+      <p class="error-message">Select a unit Measurement.</p>
+    </div>
+  </div>
+
+  <label>Provider</label>
+  <select formControlName="Provider" required name="status" placeholder="select"
+    (change)="sendProviderSelected(provider)">
+    <option value="">select a option</option>
+    <option [ngValue]="provider" *ngFor="let provider of listProviders">{{provider.name}}</option>
+  </select>
+
+  <div *ngIf="dataForm['Provider'].touched" class="form-danger-alert">
+    <div *ngIf="dataForm['Provider'].errors && dataForm['Provider'].errors['required']">
+      <p class="error-message">Select a provider.</p>
+    </div>
+  </div>
+</form>

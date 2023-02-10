@@ -18,6 +18,7 @@ import { ListProvidersComponent } from './feature/provider/components/list-provi
 import { CreateProviderComponent } from './feature/provider/components/create-provider/create-provider.component';
 import { AppSelectorComponent } from './feature/app-selector/app-selector.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    CoreModule,
     routing
   ],
   providers: [],

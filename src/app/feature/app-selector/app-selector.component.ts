@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Category } from '../category/shared/model/category';
 import { CategoryService } from '../category/shared/service/category.service';
 import { Provider } from '../provider/shared/model/provider';
@@ -12,6 +13,8 @@ import { UnitMeasurementService } from '../unit-measurement/shared/service/unit-
   styleUrls: ['./app-selector.component.sass']
 })
 export class AppSelectorComponent implements OnInit {
+
+  optionsSelectorForm!: FormGroup
 
   @Output() categorySelected = new EventEmitter<Category>();
   @Output() unitMeasurementSelected = new EventEmitter<UnitMeasurement>();
@@ -28,7 +31,9 @@ export class AppSelectorComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private unitMeasureService: UnitMeasurementService,
-    private providerService: ProviderService) { }
+    private providerService: ProviderService) {
+    this.buildOptionsSelector();
+  }
 
   ngOnInit(): void {
     this.categoryService.doGetList().subscribe(res => {
@@ -38,16 +43,29 @@ export class AppSelectorComponent implements OnInit {
     this.providerService.doGetList().subscribe(res => { this.listProviders = res });
   }
 
+  private buildOptionsSelector() {
+    this.optionsSelectorForm = new FormGroup({
+      Category: new FormControl('', [Validators.required]),
+      UnitMeasurement: new FormControl('', [Validators.required]),
+      Provider: new FormControl('', [Validators.required]),
+    });
+  }
+
   sendCategorySelected(category: Category) {
+    category = this.optionsSelectorForm.get(['Category'])?.value;
     this.categorySelected.emit(category);
   }
 
   sendUMSelected(um: UnitMeasurement) {
+    um = this.optionsSelectorForm.get(['UnitMeasurement'])?.value;
     this.unitMeasurementSelected.emit(um);
   }
 
   sendProviderSelected(provider: Provider) {
+    provider = this.optionsSelectorForm.get(['Provider'])?.value;
     this.providerSelected.emit(provider);
   }
+
+  get dataForm() { return this.optionsSelectorForm.controls; }
 
 }

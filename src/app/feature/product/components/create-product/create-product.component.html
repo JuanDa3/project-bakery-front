@@ -1,14 +1,14 @@
 <div class="box-forms shadow-lg">
-  <p>Create Product</p>
+  <p class="subtitle">Create Product</p>
 
   <form [formGroup]="productForm" (ngSubmit)="create()" class="flex flex-col" action="">
     <div class="form-group">
       <label>Name</label>
       <input id="productName" formControlName="name" required class="" type="text" placeholder="Name of product">
 
-      <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="invalid-feedback">
-        <div *ngIf="name?.errors?.['required']">
-          Name is required.
+      <div *ngIf="dataForm['name'].touched" class="form-danger-alert">
+        <div *ngIf="dataForm['name'].errors && dataForm['name'].errors['required']">
+          <p class="error-message">Name is required.</p>
         </div>
       </div>
 
@@ -16,17 +16,33 @@
       <label>Reference</label>
       <input formControlName="reference" type="text" placeholder="Name of product">
 
-
+      <div *ngIf="dataForm['reference'].touched" class="form-danger-alert">
+        <div *ngIf="dataForm['reference'].errors && dataForm['reference'].errors['required']">
+          <p class="error-message">Reference is required.</p>
+        </div>
+      </div>
 
       <label>Amount</label>
       <input formControlName="amount" type="number" placeholder="Name of product">
 
+      <div *ngIf="dataForm['amount'].touched" class="form-danger-alert">
+        <div *ngIf="dataForm['amount'].errors && dataForm['amount'].errors['required']">
+          <p class="error-message">Amount is required.</p>
+        </div>
+      </div>
 
       <label>Price</label>
       <input formControlName="price" type="number" placeholder="Name of product">
 
+      <div *ngIf="dataForm['price'].touched" class="form-danger-alert">
+        <div *ngIf="dataForm['price'].errors && dataForm['price'].errors['required']">
+          <p class="error-message">Price is required.</p>
+        </div>
+      </div>
+
       <app-selector (categorySelected)="getCategory($event)" (providerSelected)="getProvider($event)"
-        (unitMeasurementSelected)="getUM($event)"></app-selector>
+        (unitMeasurementSelected)="getUM($event)">
+      </app-selector>
 
       <button role="button" type="submit" class="button-create">
         Create Product

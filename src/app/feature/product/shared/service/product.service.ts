@@ -1,14 +1,20 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Product } from "../model/product";
-import { Observable, catchError, throwError, map } from "rxjs";
-import Swal from "sweetalert2";
+import { BehaviorSubject, Observable, Subject, tap } from "rxjs";
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+
+  private _refreshList = new Subject<void>();
+
+  get refreshList(){
+    return this._refreshList;
+  }
 
   urlEndpoint = 'http://localhost:8080/products';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -17,15 +23,9 @@ export class ProductService {
 
 
   doPost(product: Product): Observable<Product> {
-    return this.http.post(this.urlEndpoint, product, { headers: this.httpHeaders }).pipe(
-      map((response: any) => response.product as Product),
-      catchError((e) => {
-        if (e.status == 400) {
-          return throwError(() => e);
-        }
-
-        Swal.fire(e.error.message, e.error.error, 'error')
-        return throwError(() => e);
+    return this.http.post<Product>(this.urlEndpoint, product).pipe(
+      tap(() =>{
+        this.refreshList.next();
       })
     );
   }

@@ -1,8 +1,11 @@
-import { Provider } from '@angular/compiler/src/compiler_facade_interface';
+import { Provider } from "src/app/feature/provider/shared/model/provider";
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/feature/product/shared/model/product';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/feature/category/shared/model/category';
 import { UnitMeasurement } from 'src/app/feature/unit-measurement/shared/model/unit-measurement';
+import { ProductService } from 'src/app/feature/product/shared/service/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-product',
@@ -12,8 +15,12 @@ import { UnitMeasurement } from 'src/app/feature/unit-measurement/shared/model/u
 export class CreateProductComponent implements OnInit {
 
   productForm!: FormGroup;
+  private category!: Category;
+  private unitMeasurement!: UnitMeasurement;
+  private provider!: Provider;
 
-  constructor() {
+  constructor(
+    private productService: ProductService) {
     this.buildFormProduct();
   }
 
@@ -21,19 +28,64 @@ export class CreateProductComponent implements OnInit {
   }
 
   create() {
-    console.log(this.productForm.value["name"]);
+    if (this.productForm.valid && this.validateObjects() === true) {
+      const product: Product = {
+        name: this.productForm.value["name"],
+        reference: this.productForm.value["reference"],
+        price: this.productForm.value["price"],
+        amount: this.productForm.value["amount"],
+        category: this.category,
+        unitMeasurement: this.unitMeasurement,
+        provider: this.provider
+      }
+      this.productService.doPost(product).subscribe(data => {
+        console.log(data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Successful!',
+          text: 'product registered correctly',
+        });
+      });
+
+      this.productForm.reset;
+
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You need complete all the fields',
+      });
+    }
+  }
+
+  validateObjects(): boolean {
+
+    if (!this.category) {
+      console.log("prueba en categoria");
+      return false;
+    }
+
+    if (!this.unitMeasurement) {
+      return false;
+    }
+
+    if (!this.provider) {
+      return false;
+    }
+    console.log("prueba fuera de categoria");
+    return true;
   }
 
   getCategory(category: Category) {
-    console.log(category);
+    this.category = category;
   }
 
   getProvider(provider: Provider) {
-    console.log(provider);
+    this.provider = provider;
   }
 
   getUM(um: UnitMeasurement) {
-    console.log(um);
+    this.unitMeasurement = um;
   }
 
   private buildFormProduct() {
@@ -45,6 +97,6 @@ export class CreateProductComponent implements OnInit {
     });
   }
 
-  get name() { return this.productForm.get('name'); }
+  get dataForm() { return this.productForm.controls; }
 
 }
