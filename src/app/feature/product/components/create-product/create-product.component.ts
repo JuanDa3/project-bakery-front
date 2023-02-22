@@ -47,7 +47,7 @@ export class CreateProductComponent implements OnInit {
         });
       });
 
-      this.productForm.reset;
+      this.productForm.reset();
 
     } else {
       Swal.fire({

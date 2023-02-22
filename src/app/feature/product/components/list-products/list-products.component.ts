@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, map, Observable, pipe, Subscription } from 'rxjs';
 import { Product } from 'src/app/feature/product/shared/model/product';
 import { ProductService } from 'src/app/feature/product/shared/service/product.service';
+import { Page } from '../../shared/model/page';
 
 @Component({
   selector: 'app-list-products',
@@ -10,14 +11,12 @@ import { ProductService } from 'src/app/feature/product/shared/service/product.s
 })
 export class ListProductsComponent implements OnInit {
 
-  listProducts$: Product[] = [];
-  subscription!: Subscription;
-  products$!: Observable<Product[]>;
+  products$!: Observable<any>;
+  currentPage: number = 0;
 
   constructor(
-    private productService: ProductService) {
-
-    }
+    private productService: ProductService)
+    {}
 
   ngOnInit(): void {
     this.getProducts();
@@ -26,7 +25,26 @@ export class ListProductsComponent implements OnInit {
     });
   }
 
-  getProducts(){
-    this.products$ = this.productService.doGetList();
+  getProducts(): void{
+    this.products$ = this.productService.doGetListPage(this.currentPage).pipe(
+      map((response:Page) =>{
+        console.log(response);
+        return response;
+      })
+    );
+  }
+
+  goToPage(pageNumber?: number):void{
+    this.products$ = this.productService.doGetListPage(pageNumber).pipe(
+      map((response:Page) =>{
+        console.log(response);
+        return response;
+      })
+    );
+  }
+
+  goToNextOrPreviousPage(direction?: string):void{
+
   }
 }
+

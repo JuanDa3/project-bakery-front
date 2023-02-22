@@ -1,4 +1,4 @@
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ProductComponent } from './feature/product/product.component';
 
 const appRoutes = [

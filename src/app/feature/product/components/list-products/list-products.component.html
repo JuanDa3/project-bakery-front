@@ -1,39 +1,65 @@
 <div class="box-forms shadow-lg">
   <p class="subtitle">List of Products</p>
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-3">Name</th>
-          <th scope="col" class="px-6 py-3">Amount</th>
-          <th scope="col" class="px-6 py-3">Price</th>
-          <th scope="col" class="px-6 py-3">Reference</th>
-          <th scope="col" class="px-6 py-3">Category</th>
-          <th scope="col" class="px-6 py-3">Provider</th>
-          <th scope="col" class="px-6 py-3">Unit Measurement</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center"
-          *ngFor="let product of products$ | async">
-          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{product.name}}
-          </td>
-          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {{product.amount}}
-          </td>
-          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {{product.price}}
-          </td>
-          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {{product.reference}}</td>
-          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {{product.category.name}}</td>
-          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {{product.provider.name}}</td>
-          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {{product.unitMeasurement.name}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <ng-container *ngIf="(products$ | async) as contentPage">
+    <div class="container">
+      <table class="table table-striped text-center">
+        <thead class="">
+          <tr>
+            <th scope="col" class="">Name</th>
+            <th scope="col" class="">Amount</th>
+            <th scope="col" class="">Price</th>
+            <th scope="col" class="">Reference</th>
+            <th scope="col" class="">Category</th>
+            <th scope="col" class="">Provider</th>
+            <th scope="col" class="">UM</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr class="" *ngFor="let product of contentPage.content">
+            <td scope="row" class="">
+              {{product.name}}
+            </td>
+            <td scope="row" class="">
+              {{product.amount}}
+            </td>
+            <td scope="row" class="">
+              {{product.price}}
+            </td>
+            <td scope="row" class="">
+              {{product.reference}}
+            </td>
+            <td scope="row" class="">
+              {{product.category.name}}
+            </td>
+            <td scope="row" class="">
+              {{product.provider.name}}
+            </td>
+            <td scope="row" class="">
+              {{product.unitMeasurement.name}}
+            </td>
+            <td scope="row" class="">
+              <button type="button" class="btn btn-primary">Update</button>
+            </td>
+            <td scope="row" class="">
+              <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item">
+            <span class="page-link">Previous</span>
+          </li>
+          <li *ngFor="let pageNumber of [].constructor(contentPage.totalPages); let i = index;" class="page-item"><a
+              class="page-link" (click)="goToPage(i)">{{i
+              + 1}}</a></li>
+          <li class="page-item">
+            <a class="page-link">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </ng-container>
 </div>

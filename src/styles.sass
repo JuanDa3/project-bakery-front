@@ -1,8 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@tailwind base
-@tailwind components
-@tailwind utilities
-
 html
   margin: 0
   padding: 0
@@ -10,6 +6,18 @@ html
 body
   margin: 0
   padding: 0
+
+a
+  text-decoration: none
+p
+  margin: 0
+
+//helpers
+.w-65
+  width: 65%!important
+
+.w-40
+  width: 40%!important
 
 // colors
 $primary-blue-color: rgb(34,45,50)
@@ -32,6 +40,7 @@ $white-color: rgb(255,255,255)
 .button-create
   background-color: rgb(235, 121, 15)
   margin: 20px auto
+  border: 1px solid
   border-radius: 5px
   color: $white-color
   width: 60%
@@ -40,9 +49,9 @@ $white-color: rgb(255,255,255)
 .box-forms
   border-radius: .25em
   border: 1px solid transparent
-  margin: 15px
+  margin: 10px
   border-top: 3px solid transparent
-  border-top-color: $secondary-gray-color
+  border-top-color: $primary-blue-color
   p.subtitle
     margin: 10px auto
     padding: 0 0 10px 0

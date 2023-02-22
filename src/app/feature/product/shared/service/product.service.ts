@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Product } from "../model/product";
-import { BehaviorSubject, Observable, Subject, tap } from "rxjs";
+import { BehaviorSubject, map, Observable, Subject, tap } from "rxjs";
+import { Page } from "../model/page";
 
 
 
@@ -32,5 +33,9 @@ export class ProductService {
 
   public doGetList(): Observable<Product[]> {
     return this.http.get<Product[]>(this.urlEndpoint + '/list', { headers: this.httpHeaders });
+  }
+
+  public doGetListPage(page: number): Observable<Page> {
+    return this.http.get<any>(this.urlEndpoint + '/page/' + page);
   }
 }

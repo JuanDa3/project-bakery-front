@@ -1,7 +1,7 @@
-<div class="box-forms shadow-lg">
+<div class="box-forms shadow-sm bg-body rounded">
   <p class="subtitle">Create Product</p>
 
-  <form [formGroup]="productForm" (ngSubmit)="create()" class="flex flex-col" action="">
+  <form [formGroup]="productForm" (ngSubmit)="create()" class="" action="">
     <div class="form-group">
       <label>Name</label>
       <input id="productName" formControlName="name" required class="" type="text" placeholder="Name of product">
