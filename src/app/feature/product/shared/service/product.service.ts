@@ -24,11 +24,15 @@ export class ProductService {
 
 
   doPost(product: Product): Observable<any> {
-    return this.http.post<Product>(this.urlEndpoint, product).pipe(
+    return this.http.post<Product>(this.urlEndpoint, product, {headers: this.httpHeaders}).pipe(
       tap(() =>{
         this.refreshList.next();
       })
     );
+  }
+
+  doPut(product: Product, idProduct: number): Observable<any>{
+    return this.http.put<Product>(`${this.urlEndpoint}/${idProduct}`, product, {headers: this.httpHeaders});
   }
 
   public doGetList(): Observable<Product[]> {
@@ -41,5 +45,14 @@ export class ProductService {
 
   public doGetProductById(id:number) {
     return this.http.get<any>(`${this.urlEndpoint}/${id}`);
+  }
+
+  public doDelete(idProduct: number){
+    return this.http.delete(`${this.urlEndpoint}/${idProduct}`, {headers: this.httpHeaders})
+    .pipe(
+      tap(() =>{
+        this.refreshList.next();
+      })
+    );
   }
 }

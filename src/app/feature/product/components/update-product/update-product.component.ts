@@ -8,9 +8,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/feature/category/shared/model/category';
 import { Provider } from "src/app/feature/provider/shared/model/provider";
 import { UnitMeasurement } from 'src/app/feature/unit-measurement/shared/model/unit-measurement';
+import { Router } from '@angular/router';
 import { CategoryService } from "src/app/feature/category/shared/service/category.service";
 import { UnitMeasurementService } from "src/app/feature/unit-measurement/shared/service/unit-measurement.service";
 import { ProviderService } from 'src/app/feature/provider/shared/service/provider.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-product',
@@ -20,11 +22,8 @@ import { ProviderService } from 'src/app/feature/provider/shared/service/provide
 export class UpdateProductComponent implements OnInit {
 
   productId: number;
-  product : Product;
+  product: Product;
   productForm: FormGroup;
-  category!: Category;
-  unitMeasurement!: UnitMeasurement;
-  provider!: Provider;
   listCategories: Category[] = [];
   listUnitMeasurements: UnitMeasurement[] = [];
   listProviders: Provider[] = [];
@@ -34,6 +33,7 @@ export class UpdateProductComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService,
     private location: Location,
+    private router: Router,
     private categoryService: CategoryService,
     private unitMeasureService: UnitMeasurementService,
     private providerService: ProviderService
@@ -46,18 +46,18 @@ export class UpdateProductComponent implements OnInit {
     this.getLists();
   }
 
-  private getProduct():void{
-      this.route.paramMap
+  private getProduct(): void {
+    this.route.paramMap
       .pipe(
         switchMap((params) => {
           this.productId = parseInt(params.get('id'));
-          if(this.productId){
+          if (this.productId) {
             return this.productService.doGetProductById(this.productId);
           }
           return [null]
         })
       )
-      .subscribe((data) =>{
+      .subscribe((data) => {
         this.product = data.product;
         this.productForm.patchValue({
           name: this.product.name,
@@ -69,36 +69,63 @@ export class UpdateProductComponent implements OnInit {
           provider: this.product.provider.name
         });
       });
-    }
+  }
 
-    private getLists():void{
-      this.categoryService.doGetList().subscribe(res => {
-        this.listCategories = res
-      });
-      this.unitMeasureService.doGetList().subscribe(res => { this.listUnitMeasurements = res });
-      this.providerService.doGetList().subscribe(res => { this.listProviders = res });
-    }
+  private getLists(): void {
+    this.categoryService.doGetList().subscribe(res => {
+      this.listCategories = res
+    });
+    this.unitMeasureService.doGetList().subscribe(res => { this.listUnitMeasurements = res });
+    this.providerService.doGetList().subscribe(res => { this.listProviders = res });
+  }
 
-    private buildFormProduct(){
+  private buildFormProduct() {
     this.productForm = new FormGroup({
       name: new FormControl(
-        {value:'', disabled:true}, [Validators.required]),
+        { value: '', disabled: true }, [Validators.required]),
       reference: new FormControl(
-        {value:'', disabled:true},
+        { value: '', disabled: true },
         [Validators.required, Validators.min(0)]),
       price: new FormControl('', [Validators.required, Validators.min(0)]),
       amount: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
-      unitMeasurement: new FormControl({value:'', disabled:true}, [Validators.required]),
+      unitMeasurement: new FormControl({ value: '', disabled: true }, [Validators.required]),
       provider: new FormControl('', [Validators.required]),
     });
   }
 
-  update():void{
+  update(): void {
+    if (this.productForm.valid) {
+      const product: Product = {
+        idProduct: this.product.idProduct,
+        name: this.product.name,
+        reference: this.product.reference,
+        price: this.productForm.value["price"],
+        amount: this.productForm.value["amount"],
+        category: this.listCategories.find(x => x.name == this.productForm.value["category"]),
+        unitMeasurement: this.product.unitMeasurement,
+        provider: this.listProviders.find(x => x.name == this.productForm.value["provider"])
+      }
+      console.log(product);
+      this.productService.doPut(product, this.product.idProduct).subscribe(data => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Successful!',
+          text: data.message,
+        });
+      });
 
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You need fill all the fields',
+      });
+    }
+    this.router.navigate(['/products']);
   }
 
-  goToBack(){
+  goToBack() {
     this.location.back();
   }
 
