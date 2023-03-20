@@ -23,7 +23,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
 
-  doPost(product: Product): Observable<Product> {
+  doPost(product: Product): Observable<any> {
     return this.http.post<Product>(this.urlEndpoint, product).pipe(
       tap(() =>{
         this.refreshList.next();
@@ -37,5 +37,9 @@ export class ProductService {
 
   public doGetListPage(page: number): Observable<Page> {
     return this.http.get<any>(this.urlEndpoint + '/page/' + page);
+  }
+
+  public doGetProductById(id:number) {
+    return this.http.get<any>(`${this.urlEndpoint}/${id}`);
   }
 }

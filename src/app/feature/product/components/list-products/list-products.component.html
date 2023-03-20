@@ -12,6 +12,8 @@
             <th scope="col" class="">Category</th>
             <th scope="col" class="">Provider</th>
             <th scope="col" class="">UM</th>
+            <th scope="col" class="">Update</th>
+            <th scope="col" class="">Delete</th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -38,7 +40,8 @@
               {{product.unitMeasurement.name}}
             </td>
             <td scope="row" class="">
-              <button type="button" class="btn btn-primary">Update</button>
+              <button [routerLink]="['/product', product.idProduct]" type="button" class="btn btn-primary">
+                Update</button>
             </td>
             <td scope="row" class="">
               <button type="button" class="btn btn-danger">Delete</button>

@@ -40,9 +40,41 @@
         </div>
       </div>
 
-      <app-selector (categorySelected)="getCategory($event)" (providerSelected)="getProvider($event)"
-        (unitMeasurementSelected)="getUM($event)">
-      </app-selector>
+      <label>Category</label>
+      <select formControlName="category" name="status" required>
+        <option value="">select a option</option>
+        <option [ngValue]="category" *ngFor="let category of listCategories">{{category.name}}</option>
+      </select>
+
+      <div *ngIf="dataForm['category'].touched" class="form-danger-alert">
+        <div *ngIf="dataForm['category'].errors && dataForm['category'].errors['required']">
+          <p class="error-message">Select a category.</p>
+        </div>
+      </div>
+
+      <label>Unit Measurement</label>
+      <select formControlName="unitMeasurement" required name="status" placeholder="select">
+        <option value="">select a option</option>
+        <option [ngValue]="um" *ngFor="let um of listUnitMeasurements">{{um.name}}</option>
+      </select>
+
+      <div *ngIf="dataForm['unitMeasurement'].touched" class="form-danger-alert">
+        <div *ngIf="dataForm['unitMeasurement'].errors && dataForm['unitMeasurement'].errors['required']">
+          <p class="error-message">Select a unit Measurement.</p>
+        </div>
+      </div>
+
+      <label>Provider</label>
+      <select formControlName="provider" required name="status" placeholder="select">
+        <option value="">select a option</option>
+        <option [ngValue]="provider" *ngFor="let provider of listProviders">{{provider.name}}</option>
+      </select>
+
+      <div *ngIf="dataForm['provider'].touched" class="form-danger-alert">
+        <div *ngIf="dataForm['provider'].errors && dataForm['provider'].errors['required']">
+          <p class="error-message">Select a provider.</p>
+        </div>
+      </div>
 
       <button role="button" type="submit" class="button-create">
         Create Product

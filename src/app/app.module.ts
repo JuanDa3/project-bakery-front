@@ -16,9 +16,9 @@ import { ListCategoriesComponent } from './feature/category/components/list-cate
 import { ProviderComponent } from './feature/provider/provider.component';
 import { ListProvidersComponent } from './feature/provider/components/list-providers/list-providers.component';
 import { CreateProviderComponent } from './feature/provider/components/create-provider/create-provider.component';
-import { AppSelectorComponent } from './feature/app-selector/app-selector.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
+import { UpdateProductComponent } from './feature/product/components/update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { CoreModule } from './core/core.module';
     ProviderComponent,
     ListProvidersComponent,
     CreateProviderComponent,
-    AppSelectorComponent,
+    UpdateProductComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, map, Observable, pipe, Subscription } from 'rxjs';
-import { Product } from 'src/app/feature/product/shared/model/product';
+import { map, Observable  } from 'rxjs';
 import { ProductService } from 'src/app/feature/product/shared/service/product.service';
 import { Page } from '../../shared/model/page';
 

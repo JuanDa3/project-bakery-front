@@ -1,0 +1,41 @@
+<div class="box-forms shadow-sm bg-body rounded">
+  <p class="subtitle">Update Product</p>
+  <div *ngIf="product">
+    <form [formGroup]="productForm" (ngSubmit)="update()" class="p-3" action="">
+      <label for="">Name</label>
+      <input formControlName="name">
+
+      <label>Reference</label>
+      <input formControlName="reference" type="text" placeholder="Name of product">
+
+      <label>Amount</label>
+      <input formControlName="amount" type="number" placeholder="Name of product" min="0">
+
+      <label>Price</label>
+      <input formControlName="price" type="number" placeholder="Name of product" min="0">
+
+      <label>Category</label>
+      <select formControlName="category">
+        <option [ngValue]="product.category.name" *ngFor="let category of listCategories">
+          {{category.name}}</option>
+      </select>
+
+      <label>Unit Measurement</label>
+      <select formControlName="unitMeasurement" required name="status" placeholder="select">
+        <option [ngValue]="product.unitMeasurement.name" *ngFor="let um of listUnitMeasurements">{{um.name}}</option>
+      </select>
+
+      <label>Provider</label>
+      <select formControlName="provider" required name="status" placeholder="select">
+        <option [ngValue]="product.provider.name" *ngFor="let provider of listProviders">{{provider.name}}</option>
+      </select>
+
+      <div class="w-100 d-flex justify-center">
+        <button role="button" type="submit" class="button-create">
+          Update Product
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
