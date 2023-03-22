@@ -14,7 +14,7 @@
 
 
       <label>Reference</label>
-      <input formControlName="reference" type="text" placeholder="Name of product">
+      <input formControlName="reference" type="text" placeholder="Reference of product">
 
       <div *ngIf="dataForm['reference'].touched" class="form-danger-alert">
         <div *ngIf="dataForm['reference'].errors && dataForm['reference'].errors['required']">
@@ -23,7 +23,7 @@
       </div>
 
       <label>Amount</label>
-      <input formControlName="amount" type="number" placeholder="Name of product">
+      <input formControlName="amount" type="number" placeholder="Amount of product">
 
       <div *ngIf="dataForm['amount'].touched" class="form-danger-alert">
         <div *ngIf="dataForm['amount'].errors && dataForm['amount'].errors['required']">
@@ -32,7 +32,7 @@
       </div>
 
       <label>Price</label>
-      <input formControlName="price" type="number" placeholder="Name of product">
+      <input formControlName="price" type="number" placeholder="Price of product">
 
       <div *ngIf="dataForm['price'].touched" class="form-danger-alert">
         <div *ngIf="dataForm['price'].errors && dataForm['price'].errors['required']">
@@ -41,10 +41,12 @@
       </div>
 
       <label>Category</label>
-      <select formControlName="category" name="status" required>
-        <option value="">select a option</option>
-        <option [ngValue]="category" *ngFor="let category of listCategories">{{category.name}}</option>
-      </select>
+      <ng-container *ngIf="(listCategories$ | async) as listCategories">
+        <select formControlName="category" name="status" required>
+          <option value="">select a option</option>
+          <option [ngValue]="category" *ngFor="let category of listCategories">{{category.name}}</option>
+        </select>
+      </ng-container>
 
       <div *ngIf="dataForm['category'].touched" class="form-danger-alert">
         <div *ngIf="dataForm['category'].errors && dataForm['category'].errors['required']">

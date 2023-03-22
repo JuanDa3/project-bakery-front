@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Product } from "../model/product";
-import { BehaviorSubject, map, Observable, Subject, tap } from "rxjs";
+import { Observable, Subject, tap } from "rxjs";
 import { Page } from "../model/page";
 
 

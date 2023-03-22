@@ -1,12 +1,18 @@
 <div class="box-forms shadow-sm">
   <p class="subtitle">Create Category</p>
 
-  <form class="flex flex-col" action="">
+  <form [formGroup]="categoryForm" class="flex flex-col" (ngSubmit)="create()" action="">
     <div class="form-group">
       <label>Name</label>
-      <input class="" type="text" placeholder="Name of product">
+      <input id="categoryName" formControlName="name" required class="" type="text" placeholder="Category">
 
-      <button class="button-create">
+      <div *ngIf="dataForm['name'].touched" class="form-danger-alert">
+        <div *ngIf="dataForm['name'].errors && dataForm['name'].errors['required']">
+          <p class="error-message">Name is required.</p>
+        </div>
+      </div>
+
+      <button role="button" type="submit" class="button-create">
         Create Category
       </button>
 

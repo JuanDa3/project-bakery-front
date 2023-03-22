@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { CategoryService } from "src/app/feature/category/shared/service/category.service";
 import { UnitMeasurementService } from "src/app/feature/unit-measurement/shared/service/unit-measurement.service";
 import { ProviderService } from "src/app/feature/provider/shared/service/provider.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-create-product',
@@ -18,7 +19,7 @@ import { ProviderService } from "src/app/feature/provider/shared/service/provide
 export class CreateProductComponent implements OnInit {
 
   productForm: FormGroup;
-  listCategories: Category[] = [];
+  listCategories$: Observable<any>;
   listUnitMeasurements: UnitMeasurement[] = [];
   listProviders: Provider[] = [];
 
@@ -31,11 +32,10 @@ export class CreateProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoryService.doGetList().subscribe(res => {
-      this.listCategories = res
+    this.categoryService.refreshListCategories.subscribe(() =>{
+      this.chargeLists();
     });
-    this.unitMeasureService.doGetList().subscribe(res => { this.listUnitMeasurements = res });
-    this.providerService.doGetList().subscribe(res => { this.listProviders = res });
+    this.chargeLists();
   }
 
   create() {
@@ -66,6 +66,12 @@ export class CreateProductComponent implements OnInit {
     }
 
     this.productForm.reset();
+  }
+
+  private chargeLists(){
+    this.listCategories$ = this.categoryService.doGetList();
+    this.unitMeasureService.doGetList().subscribe(res => { this.listUnitMeasurements = res });
+    this.providerService.doGetList().subscribe(res => { this.listProviders = res });
   }
 
   private buildFormProduct() {
