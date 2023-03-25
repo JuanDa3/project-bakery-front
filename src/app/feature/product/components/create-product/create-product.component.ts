@@ -20,7 +20,7 @@ export class CreateProductComponent implements OnInit {
 
   productForm: FormGroup;
   listCategories$: Observable<any>;
-  listUnitMeasurements: UnitMeasurement[] = [];
+  listUnitMeasurements$: Observable<any>;
   listProviders: Provider[] = [];
 
   constructor(
@@ -35,6 +35,11 @@ export class CreateProductComponent implements OnInit {
     this.categoryService.refreshListCategories.subscribe(() =>{
       this.chargeLists();
     });
+
+    this.unitMeasureService.refreshListUnitMeasurements.subscribe(() =>{
+      this.chargeLists();
+    });
+
     this.chargeLists();
   }
 
@@ -70,7 +75,7 @@ export class CreateProductComponent implements OnInit {
 
   private chargeLists(){
     this.listCategories$ = this.categoryService.doGetList();
-    this.unitMeasureService.doGetList().subscribe(res => { this.listUnitMeasurements = res });
+    this.listUnitMeasurements$ = this.unitMeasureService.doGetList();
     this.providerService.doGetList().subscribe(res => { this.listProviders = res });
   }
 

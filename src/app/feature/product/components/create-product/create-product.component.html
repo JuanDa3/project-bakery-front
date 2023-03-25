@@ -55,10 +55,12 @@
       </div>
 
       <label>Unit Measurement</label>
-      <select formControlName="unitMeasurement" required name="status" placeholder="select">
-        <option value="">select a option</option>
-        <option [ngValue]="um" *ngFor="let um of listUnitMeasurements">{{um.name}}</option>
-      </select>
+      <ng-container *ngIf="(listUnitMeasurements$ | async) as listUnitMeasurements">
+        <select formControlName="unitMeasurement" required name="status" placeholder="select">
+          <option value="">select a option</option>
+          <option [ngValue]="um" *ngFor="let um of listUnitMeasurements">{{um.name}}</option>
+        </select>
+      </ng-container>
 
       <div *ngIf="dataForm['unitMeasurement'].touched" class="form-danger-alert">
         <div *ngIf="dataForm['unitMeasurement'].errors && dataForm['unitMeasurement'].errors['required']">
