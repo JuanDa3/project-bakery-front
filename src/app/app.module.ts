@@ -19,6 +19,7 @@ import { CreateProviderComponent } from './feature/provider/components/create-pr
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
 import { UpdateProductComponent } from './feature/product/components/update-product/update-product.component';
+import { ListMeasurementUnitsComponent } from './feature/unit-measurement/components/list-measurement-units/list-measurement-units.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { UpdateProductComponent } from './feature/product/components/update-prod
     ListProvidersComponent,
     CreateProviderComponent,
     UpdateProductComponent,
+    ListMeasurementUnitsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,43 @@
+<div class="box-forms shadow-lg">
+    <p class="subtitle">List of Measurement Units</p>
+    <ng-container *ngIf="(unitsMeasurement$ | async) as contentPage">
+        <div class="container">
+            <table class="table table-striped text-center">
+                <thead class="">
+                    <tr>
+                        <th scope="col" class="">ID</th>
+                        <th scope="col" class="">Name</th>
+                        <th scope="col" class="">Delete</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr class="" *ngFor="let um of contentPage.content">
+                        <td scope="row" class="">
+                            {{um.idUnitMeasurement}}
+                        </td>
+                        <td scope="row" class="">
+                            {{um.name}}
+                        </td>
+                        <td scope="row" class="">
+                            <button (click)="delete(um)" type="button" class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <span class="page-link">Previous</span>
+                    </li>
+                    <li *ngFor="let pageNumber of [].constructor(contentPage.totalPages); let i = index;"
+                        class="page-item"><a class="page-link" (click)="goToPage(i)">{{i
+                            + 1}}</a></li>
+                    <li class="page-item">
+                        <a class="page-link">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </ng-container>
+</div>

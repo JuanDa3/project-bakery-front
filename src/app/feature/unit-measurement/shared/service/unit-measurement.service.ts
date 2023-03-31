@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { UnitMeasurement } from '../model/unit-measurement';
+import { Page } from 'src/app/feature/product/shared/model/page';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class UnitMeasurementService {
   }
 
   urlEndpoint = 'http://localhost:8080/unitmeasurement';
+
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) { }
@@ -26,6 +28,19 @@ export class UnitMeasurementService {
   doPost(unitMeasurement: UnitMeasurement): Observable<any>{
     return this.http.post<UnitMeasurement>(this.urlEndpoint, unitMeasurement, { headers: this.httpHeaders}).pipe(
       tap(() => {
+        this.refreshListUnitMeasurements.next();
+      })
+    );
+  }
+
+  public doGetListPage(page: number): Observable<Page> {
+    return this.http.get<any>(this.urlEndpoint + '/page/' + page);
+  }
+
+  public doDelete(idUnitMeasurement: number){
+    return this.http.delete(`${this.urlEndpoint}/${idUnitMeasurement}`, {headers: this.httpHeaders})
+    .pipe(
+      tap(() =>{
         this.refreshListUnitMeasurements.next();
       })
     );
