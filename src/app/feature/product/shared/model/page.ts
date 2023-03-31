@@ -1,7 +1,7 @@
 import { Product } from "./product"
 
 export interface Page {
-    content: Product[],
+    content: any[],
     pageable: {
         sort: {
             empty: boolean,

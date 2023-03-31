@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
+import { Page } from 'src/app/feature/product/shared/model/page';
 import { Category } from '../model/category';
 
 @Injectable({
@@ -31,5 +32,16 @@ export class CategoryService {
     );
   }
 
+  public doGetListPage(page: number): Observable<Page> {
+    return this.http.get<any>(this.urlEndpoint + '/page/' + page);
+  }
 
+  public doDelete(idCategory: number){
+    return this.http.delete(`${this.urlEndpoint}/${idCategory}`, {headers: this.httpHeaders})
+    .pipe(
+      tap(() =>{
+        this.refreshListCategories.next();
+      })
+    );
+  }
 }
